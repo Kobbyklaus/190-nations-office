@@ -44,8 +44,8 @@ const topicIcons: Record<string, React.ElementType> = {
   Shield,
 };
 
-const CONFERENCE_ROOM_URL = "https://conference-stream.vercel.app/room/CONF01";
-const REGISTER_URL = "https://conference-stream.vercel.app/register";
+const CONFERENCE_ROOM_URL = "https://www.dhmm190.com/conference/";
+const REGISTER_URL = "https://www.dhmm190.com/conference/";
 
 export default function ConferencesPage() {
   const t = useTranslations("conferences");

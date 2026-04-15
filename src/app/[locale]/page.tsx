@@ -47,7 +47,7 @@ export default function HomePage() {
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         showLogo
-        primaryCta={{ label: t("joinConference"), href: "https://conference-stream.vercel.app/room/CONF01", external: true }}
+        primaryCta={{ label: t("joinConference"), href: "https://www.dhmm190.com/conference/", external: true }}
         secondaryCta={{ label: t("getBooks"), href: "/books" }}
       />
 
