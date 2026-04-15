@@ -1,0 +1,16 @@
+{
+  "name": "190 Nations Office",
+  "short_name": "190 Nations",
+  "description": "A global ministry dedicated to equipping pastors and church leaders",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0f172a",
+  "icons": [
+    {
+      "src": "/images/logo-white.gif",
+      "sizes": "192x192",
+      "type": "image/gif"
+    }
+  ]
+}
