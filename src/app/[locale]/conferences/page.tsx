@@ -44,7 +44,7 @@ const topicIcons: Record<string, React.ElementType> = {
   Shield,
 };
 
-const CONFERENCE_ROOM_URL = "https://www.dhmm190.com/conference/";
+const CONFERENCE_ROOM_URL = "https://conference-stream.onrender.com";
 const REGISTER_URL = "https://www.dhmm190.com/conference/";
 
 export default function ConferencesPage() {
