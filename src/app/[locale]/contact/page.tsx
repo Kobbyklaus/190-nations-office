@@ -5,7 +5,7 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import Button from "@/components/ui/Button";
 import { SOCIAL_LINKS } from "@/lib/constants";
-import { Mail, Phone, MessageCircle, Clock, Video, Globe, Camera } from "lucide-react";
+import { Mail, Phone, MessageCircle, Clock, Video, Globe, Camera, Shield } from "lucide-react";
 
 const socialIcons: Record<string, React.ElementType> = {
   Youtube: Video,
@@ -118,9 +118,25 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors resize-none"
                     />
                   </div>
+                  <p className="text-xs text-gray-500 leading-relaxed flex items-start gap-2">
+                    <Shield className="w-3.5 h-3.5 text-gray-500 flex-shrink-0 mt-0.5" />
+                    <span>
+                      {t("privacyNotice")}{" "}
+                      <a
+                        href="mailto:allnations@dhmm190.com?subject=Privacy%20policy%20request"
+                        className="text-amber-400 hover:text-amber-300 underline"
+                      >
+                        {t("privacyLink")}
+                      </a>
+                      .
+                    </span>
+                  </p>
                   <Button type="submit" size="lg" className="w-full">
                     {t("submit")}
                   </Button>
+                  <p className="text-xs text-gray-500 text-center">
+                    {t("responseTimeNote")}
+                  </p>
                 </form>
               </GlassCard>
             </div>
@@ -152,19 +168,28 @@ export default function ContactPage() {
                       <Phone className="w-5 h-5 text-amber-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">{t("phoneLabel")}</p>
+                      <p className="text-xs text-gray-500">
+                        {t("phoneLabel")} · {t("phoneNote")}
+                      </p>
                       <p className="text-sm">+44 7347 084619</p>
                     </div>
                   </a>
-                  <div className="flex items-center gap-3 text-gray-300">
+                  <a
+                    href="https://wa.me/447348152218"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-gray-300 hover:text-amber-400 transition-colors"
+                  >
                     <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
                       <MessageCircle className="w-5 h-5 text-amber-400" />
                     </div>
                     <div>
-                      <p className="text-xs text-gray-500">{t("whatsappLabel")}</p>
+                      <p className="text-xs text-gray-500">
+                        {t("whatsappLabel")} · {t("whatsappNote")}
+                      </p>
                       <p className="text-sm">+44 7348 152218</p>
                     </div>
-                  </div>
+                  </a>
                   <div className="flex items-center gap-3 text-gray-300">
                     <div className="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center flex-shrink-0">
                       <Clock className="w-5 h-5 text-amber-400" />

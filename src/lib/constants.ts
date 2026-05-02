@@ -349,6 +349,9 @@ export const LANGUAGES = [
   { code: "fr", label: "Fran\u00e7ais", flag: "🇫🇷" },
   { code: "es", label: "Espa\u00f1ol", flag: "🇪🇸" },
   { code: "pt", label: "Portugu\u00eas", flag: "🇧🇷" },
+  { code: "da", label: "Dansk", flag: "🇩🇰" },
+  { code: "hi", label: "हिन्दी", flag: "🇮🇳" },
+  { code: "ur", label: "اردو", flag: "🇵🇰" },
 ];
 
 export const BOOK_LANGUAGES = [

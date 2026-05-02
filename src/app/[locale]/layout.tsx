@@ -1,7 +1,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
-import { routing } from "@/i18n/routing";
+import { routing, RTL_LOCALES, type Locale } from "@/i18n/routing";
 import { Inter, Playfair_Display } from "next/font/google";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -25,14 +25,15 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
 
-  if (!routing.locales.includes(locale as "en" | "fr" | "es" | "pt")) {
+  if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
 
   const messages = await getMessages();
+  const dir = RTL_LOCALES.includes(locale as Locale) ? "rtl" : "ltr";
 
   return (
-    <html lang={locale} className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={locale} dir={dir} className={`${inter.variable} ${playfair.variable}`}>
       <body className="min-h-screen flex flex-col bg-slate-950 text-white font-[family-name:var(--font-inter)] antialiased">
         <NextIntlClientProvider messages={messages}>
           <Navbar />

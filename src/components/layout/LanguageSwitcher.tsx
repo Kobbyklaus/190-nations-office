@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLocale } from "next-intl";
 import { useRouter, usePathname } from "@/i18n/navigation";
 import { LANGUAGES } from "@/lib/constants";
+import type { Locale } from "@/i18n/routing";
 import { Globe } from "lucide-react";
 
 export default function LanguageSwitcher() {
@@ -41,7 +42,7 @@ export default function LanguageSwitcher() {
             <button
               key={lang.code}
               onClick={() => {
-                router.replace(pathname, { locale: lang.code as "en" | "fr" | "es" | "pt" });
+                router.replace(pathname, { locale: lang.code as Locale });
                 setOpen(false);
               }}
               className={`w-full flex items-center gap-2 px-4 py-2.5 text-sm transition-colors ${

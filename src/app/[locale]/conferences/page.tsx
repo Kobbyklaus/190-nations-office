@@ -186,24 +186,74 @@ export default function ConferencesPage() {
         </div>
       </section>
 
-      {/* Country Conferences */}
+      {/* Upcoming Conferences */}
       <section className="py-24 bg-slate-900/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            title={t("countryTitle")}
-            subtitle={t("countrySubtitle")}
+            title={t("upcomingTitle")}
+            subtitle={t("upcomingSubtitle")}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CONFERENCE_EVENTS.map((event, i) => (
-              <ConferenceCard
-                key={i}
-                {...event}
-                statusLabel={
-                  event.status === "upcoming" ? t("upcoming") : t("past")
-                }
-              />
-            ))}
-          </div>
+          {(() => {
+            const upcoming = CONFERENCE_EVENTS.filter((e) => e.status === "upcoming");
+            if (upcoming.length === 0) {
+              return (
+                <GlassCard className="p-8 max-w-2xl mx-auto text-center">
+                  <p className="text-gray-300 mb-5">{t("noUpcoming")}</p>
+                  <a
+                    href={REGISTER_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
+                  >
+                    {t("hostConference")}
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </GlassCard>
+              );
+            }
+            return (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {upcoming.map((event, i) => (
+                  <ConferenceCard
+                    key={i}
+                    {...event}
+                    statusLabel={t("upcoming")}
+                  />
+                ))}
+              </div>
+            );
+          })()}
+        </div>
+      </section>
+
+      {/* Past Conferences (collapsible archive) */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <details className="group">
+            <summary className="cursor-pointer list-none">
+              <div className="text-center">
+                <h2 className="text-2xl sm:text-3xl font-bold font-[family-name:var(--font-playfair)] text-white mb-2">
+                  {t("pastArchiveTitle")}
+                </h2>
+                <p className="text-gray-400 mb-2">{t("pastArchiveSubtitle")}</p>
+                <span className="text-amber-400 text-sm font-medium group-open:hidden">
+                  ▼ Show archive
+                </span>
+                <span className="text-amber-400 text-sm font-medium hidden group-open:inline">
+                  ▲ Hide archive
+                </span>
+              </div>
+            </summary>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+              {CONFERENCE_EVENTS.filter((e) => e.status === "past").map((event, i) => (
+                <ConferenceCard
+                  key={i}
+                  {...event}
+                  statusLabel={t("past")}
+                />
+              ))}
+            </div>
+          </details>
         </div>
       </section>
 
