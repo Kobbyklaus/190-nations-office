@@ -96,7 +96,7 @@ export default function BooksPage() {
                   {items.map((book) => (
                     <a
                       key={book.slug}
-                      href={`https://dagbooks.org/book/${book.slug}`}
+                      href={`https://190.dagbooks.org/book/${book.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex flex-col"
@@ -155,7 +155,7 @@ export default function BooksPage() {
           </h2>
           <p className="text-gray-400 text-lg mb-8">{t("ctaSubtitle")}</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button href="https://dagbooks.org" external size="lg">
+            <Button href="https://190.dagbooks.org" external size="lg">
               {t("requestBooks")}
             </Button>
             <Button href="/contact" variant="outline" size="lg">

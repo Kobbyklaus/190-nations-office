@@ -16,5 +16,5 @@ export function slugify(input: string) {
 }
 
 export function dagbookUrl(title: string) {
-  return `https://dagbooks.org/book/${slugify(title)}`;
+  return `https://190.dagbooks.org/book/${slugify(title)}`;
 }

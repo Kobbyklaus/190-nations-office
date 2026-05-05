@@ -9,7 +9,7 @@ interface BookCardProps {
   href?: string;
 }
 
-export default function BookCard({ title, description, image, href = "https://dagbooks.org" }: BookCardProps) {
+export default function BookCard({ title, description, image, href = "https://190.dagbooks.org" }: BookCardProps) {
   return (
     <a
       href={href}
