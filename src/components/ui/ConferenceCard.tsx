@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { MapPin } from "lucide-react";
 
 interface ConferenceCardProps {
   country: string;
@@ -15,16 +19,28 @@ export default function ConferenceCard({
   status,
   statusLabel,
 }: ConferenceCardProps) {
+  const [imageOk, setImageOk] = useState(true);
+
   return (
     <div className="group relative rounded-xl overflow-hidden">
       <div className="aspect-[4/3] relative">
-        <Image
-          src={image}
-          alt={`${country} conference`}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        />
+        {image && imageOk ? (
+          <Image
+            src={image}
+            alt={`${country} conference`}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            onError={() => setImageOk(false)}
+          />
+        ) : (
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/30 via-amber-600/20 to-slate-900 flex flex-col items-center justify-center gap-2">
+            <MapPin className="w-10 h-10 text-amber-400/70" />
+            <span className="text-amber-200/90 text-sm font-semibold uppercase tracking-wider">
+              {country}
+            </span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-4">
