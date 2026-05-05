@@ -18,20 +18,17 @@ export const CONFERENCE_LIVE_ENABLED = false;
 //   - Spanish: daglibros (libros)
 //   - French: daglivres (livres)
 //   - Portuguese: daglivros (livros)
-//   - Danish: dagboeger (bøger, ø → oe for ASCII domains)
-//   - Hindi: dagpustak (पुस्तक)
-//   - Urdu: dagkitab (کتاب)
-// Update each entry once the actual subdomain is confirmed at the
-// dagbooks side. If a locale's domain is not yet live, leave it as
-// "190.dagbooks.org" so links don't break.
+// Danish, Hindi, and Urdu localized subdomains aren't live yet —
+// they fall back to dagbooks.org so links work today. Update each
+// value below as the localized subdomain comes online.
 export const BOOK_DOMAIN_BY_LOCALE: Record<string, string> = {
   en: "190.dagbooks.org",
   es: "190.daglibros.org",
   fr: "190.daglivres.org",
   pt: "190.daglivros.org",
-  da: "190.dagboeger.org",
-  hi: "190.dagpustak.org",
-  ur: "190.dagkitab.org",
+  da: "190.dagbooks.org", // TODO: switch to localized when subdomain is live
+  hi: "190.dagbooks.org", // TODO: switch to localized when subdomain is live
+  ur: "190.dagbooks.org", // TODO: switch to localized when subdomain is live
 };
 
 export function bookUrlFor(locale: string, slug: string): string {
