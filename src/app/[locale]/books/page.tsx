@@ -6,6 +6,7 @@ import BookCard from "@/components/ui/BookCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import Button from "@/components/ui/Button";
 import { BOOKS, BOOK_LANGUAGES } from "@/lib/constants";
+import { dagbookUrl } from "@/lib/utils";
 
 export default function BooksPage() {
   const t = useTranslations("books");
@@ -58,14 +59,14 @@ export default function BooksPage() {
               <h3 className="text-xl font-semibold text-amber-400 mb-6">
                 {category}
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
                 {BOOKS.filter((b) => b.category === category).map((book) => (
                   <BookCard
                     key={book.title}
                     title={book.title}
                     description={book.description}
                     image={book.image}
-                    href="https://dagbooks.org"
+                    href={dagbookUrl(book.title)}
                   />
                 ))}
               </div>

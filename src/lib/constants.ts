@@ -8,6 +8,10 @@ import type {
   TeachingTopic,
 } from "@/types";
 
+// Toggle the live conference room links on/off across the site.
+// Set to true once the conference-stream service is back online.
+export const CONFERENCE_LIVE_ENABLED = false;
+
 export const STATS = [
   { value: 190, suffix: "+", label: "Nations Reached" },
   { value: 1600, suffix: "+", label: "Pastors Connected" },

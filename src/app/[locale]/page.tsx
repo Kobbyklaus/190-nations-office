@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import HeroSection from "@/components/sections/HeroSection";
 import StatsSection from "@/components/sections/StatsSection";
@@ -9,10 +9,12 @@ import CTASection from "@/components/sections/CTASection";
 import UpcomingEventBanner from "@/components/sections/UpcomingEventBanner";
 import ConferenceCard from "@/components/ui/ConferenceCard";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { STATS, TESTIMONIALS, CONFERENCE_EVENTS } from "@/lib/constants";
+import { STATS, TESTIMONIALS, CONFERENCE_LIVE_ENABLED } from "@/lib/constants";
+import { getConferences } from "@/lib/conferences";
 
-export default function HomePage() {
-  const t = useTranslations("home");
+export default async function HomePage() {
+  const t = await getTranslations("home");
+  const conferences = await getConferences();
 
   const offerings = [
     { title: t("weeklyConf"), description: t("weeklyConfDesc"), icon: "weeklyConf" },
@@ -47,8 +49,14 @@ export default function HomePage() {
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         showLogo
-        primaryCta={{ label: t("joinConference"), href: "https://conference-stream.onrender.com", external: true }}
-        secondaryCta={{ label: t("getBooks"), href: "/books" }}
+        primaryCta={
+          CONFERENCE_LIVE_ENABLED
+            ? { label: t("joinConference"), href: "https://conference-stream.onrender.com", external: true }
+            : { label: t("getBooks"), href: "/books" }
+        }
+        secondaryCta={
+          CONFERENCE_LIVE_ENABLED ? { label: t("getBooks"), href: "/books" } : undefined
+        }
       />
 
       <StatsSection stats={stats} />
@@ -73,7 +81,7 @@ export default function HomePage() {
             title={t("conferences")}
           />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {CONFERENCE_EVENTS.map((event, i) => (
+            {conferences.map((event, i) => (
               <ConferenceCard
                 key={i}
                 {...event}
@@ -94,8 +102,8 @@ export default function HomePage() {
         backgroundImage="/images/bishop-dag-crowd.jpg"
         title={t("ctaTitle")}
         subtitle={t("ctaSubtitle")}
-        primaryCta={{ label: t("joinConference"), href: "/conferences" }}
-        secondaryCta={{ label: t("getBooks"), href: "/books" }}
+        primaryCta={{ label: t("getBooks"), href: "/books" }}
+        secondaryCta={{ label: t("upcomingEvent"), href: "/conferences" }}
       />
 
       {/* Scripture */}

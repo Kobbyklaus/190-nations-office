@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import HeroSection from "@/components/sections/HeroSection";
 import CTASection from "@/components/sections/CTASection";
 import SectionHeading from "@/components/ui/SectionHeading";
@@ -8,8 +8,9 @@ import Button from "@/components/ui/Button";
 import {
   CONFERENCE_SCHEDULE,
   TEACHING_TOPICS,
-  CONFERENCE_EVENTS,
+  CONFERENCE_LIVE_ENABLED,
 } from "@/lib/constants";
+import { getConferences } from "@/lib/conferences";
 import {
   Clock,
   UserPlus,
@@ -47,8 +48,9 @@ const topicIcons: Record<string, React.ElementType> = {
 const CONFERENCE_ROOM_URL = "https://conference-stream.onrender.com";
 const REGISTER_URL = "https://www.dhmm190.com/conference/";
 
-export default function ConferencesPage() {
-  const t = useTranslations("conferences");
+export default async function ConferencesPage() {
+  const t = await getTranslations("conferences");
+  const conferences = await getConferences();
 
   const steps = [
     { icon: UserPlus, title: t("step1Title"), desc: t("step1Desc") },
@@ -67,8 +69,12 @@ export default function ConferencesPage() {
         ]}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
-        primaryCta={{ label: t("joinNow"), href: CONFERENCE_ROOM_URL, external: true }}
-        secondaryCta={{ label: t("register"), href: REGISTER_URL, external: true }}
+        primaryCta={{ label: t("register"), href: REGISTER_URL, external: true }}
+        secondaryCta={
+          CONFERENCE_LIVE_ENABLED
+            ? { label: t("joinNow"), href: CONFERENCE_ROOM_URL, external: true }
+            : undefined
+        }
       />
 
       {/* Live Conference Links Banner */}
@@ -78,21 +84,23 @@ export default function ConferencesPage() {
             📡 {t("liveEveryText") || "Join us every Saturday at 10:00 AM GMT"}
           </p>
           <div className="flex gap-3">
-            <a
-              href={CONFERENCE_ROOM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
-            >
-              <Radio className="w-4 h-4" />
-              {t("joinNow")}
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+            {CONFERENCE_LIVE_ENABLED && (
+              <a
+                href={CONFERENCE_ROOM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
+              >
+                <Radio className="w-4 h-4" />
+                {t("joinNow")}
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+            )}
             <a
               href={REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-amber-500/50 text-amber-400 font-semibold text-sm hover:bg-amber-500/10 transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-amber-500 text-slate-950 font-semibold text-sm hover:bg-amber-400 transition-colors"
             >
               {t("register")}
               <ExternalLink className="w-3.5 h-3.5" />
@@ -150,13 +158,13 @@ export default function ConferencesPage() {
           </div>
           <div className="mt-10 text-center">
             <a
-              href={CONFERENCE_ROOM_URL}
+              href={REGISTER_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-semibold text-base hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/20"
             >
-              <Radio className="w-5 h-5" />
-              {t("joinNow")}
+              <UserPlus className="w-5 h-5" />
+              {t("register")}
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
@@ -194,7 +202,7 @@ export default function ConferencesPage() {
             subtitle={t("upcomingSubtitle")}
           />
           {(() => {
-            const upcoming = CONFERENCE_EVENTS.filter((e) => e.status === "upcoming");
+            const upcoming = conferences.filter((e) => e.status === "upcoming");
             if (upcoming.length === 0) {
               return (
                 <GlassCard className="p-8 max-w-2xl mx-auto text-center">
@@ -245,7 +253,7 @@ export default function ConferencesPage() {
               </div>
             </summary>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
-              {CONFERENCE_EVENTS.filter((e) => e.status === "past").map((event, i) => (
+              {conferences.filter((e) => e.status === "past").map((event, i) => (
                 <ConferenceCard
                   key={i}
                   {...event}
@@ -261,8 +269,12 @@ export default function ConferencesPage() {
         backgroundImage="/images/bishop-dag-crowd.jpg"
         title={t("ctaTitle")}
         subtitle={t("ctaSubtitle")}
-        primaryCta={{ label: t("joinNow"), href: CONFERENCE_ROOM_URL, external: true }}
-        secondaryCta={{ label: t("register"), href: REGISTER_URL, external: true }}
+        primaryCta={{ label: t("register"), href: REGISTER_URL, external: true }}
+        secondaryCta={
+          CONFERENCE_LIVE_ENABLED
+            ? { label: t("joinNow"), href: CONFERENCE_ROOM_URL, external: true }
+            : undefined
+        }
       />
     </>
   );
