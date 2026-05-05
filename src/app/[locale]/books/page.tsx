@@ -8,9 +8,9 @@ import Button from "@/components/ui/Button";
 import {
   LIBRARY_BOOKS,
   BOOK_LANGUAGES,
-  bookUrlFor,
   BOOK_DOMAIN_BY_LOCALE,
 } from "@/lib/constants";
+import { localizeBook } from "@/lib/book-translations";
 import { ArrowDownToLine } from "lucide-react";
 
 export default function BooksPage() {
@@ -100,33 +100,36 @@ export default function BooksPage() {
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-5">
-                  {items.map((book) => (
-                    <a
-                      key={book.slug}
-                      href={bookUrlFor(locale, book.slug)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex flex-col"
-                    >
-                      <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 mb-2 ring-1 ring-white/5 group-hover:ring-amber-500/40 transition-all">
-                        <Image
-                          src={book.image}
-                          alt={book.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <div className="absolute bottom-2 left-2 right-2 flex items-center gap-1.5 px-2 py-1 rounded-md bg-amber-500 text-slate-950 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                          <ArrowDownToLine className="w-3 h-3" />
-                          Download
+                  {items.map((book) => {
+                    const localized = localizeBook(book.slug, book.title, locale);
+                    return (
+                      <a
+                        key={book.slug}
+                        href={`https://${bookDomain}/book/${localized.slug}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group flex flex-col"
+                      >
+                        <div className="relative aspect-[3/4] rounded-lg overflow-hidden bg-slate-800 mb-2 ring-1 ring-white/5 group-hover:ring-amber-500/40 transition-all">
+                          <Image
+                            src={localized.image ?? book.image}
+                            alt={localized.title}
+                            fill
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, (max-width: 1280px) 20vw, 16vw"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                          <div className="absolute bottom-2 left-2 right-2 flex items-center gap-1.5 px-2 py-1 rounded-md bg-amber-500 text-slate-950 text-[10px] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                            <ArrowDownToLine className="w-3 h-3" />
+                            Download
+                          </div>
                         </div>
-                      </div>
-                      <h4 className="text-white text-xs sm:text-sm font-medium leading-snug line-clamp-2 group-hover:text-amber-400 transition-colors">
-                        {book.title}
-                      </h4>
-                    </a>
-                  ))}
+                        <h4 className="text-white text-xs sm:text-sm font-medium leading-snug line-clamp-2 group-hover:text-amber-400 transition-colors">
+                          {localized.title}
+                        </h4>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             );
