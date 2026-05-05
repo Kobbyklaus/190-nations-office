@@ -10,7 +10,7 @@ import {
   BOOK_LANGUAGES,
   BOOK_DOMAIN_BY_LOCALE,
 } from "@/lib/constants";
-import { localizeBook } from "@/lib/book-translations";
+import { localizeBook, localizeCategory, booksUiLabels } from "@/lib/book-translations";
 import { ArrowDownToLine } from "lucide-react";
 
 export default function BooksPage() {
@@ -20,6 +20,7 @@ export default function BooksPage() {
 
   const totalBooks = LIBRARY_BOOKS.length;
   const categories = Array.from(new Set(LIBRARY_BOOKS.map((b) => b.category)));
+  const uiLabels = booksUiLabels(locale);
 
   const bookStats = [
     { value: totalBooks, suffix: "+", label: t("titles") },
@@ -59,7 +60,7 @@ export default function BooksPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1 scrollbar-thin">
             <span className="text-xs uppercase tracking-wider text-gray-500 font-semibold flex-shrink-0">
-              Jump to:
+              {uiLabels.jumpTo}
             </span>
             {categories.map((cat) => (
               <a
@@ -67,7 +68,7 @@ export default function BooksPage() {
                 href={`#cat-${cat.replace(/[^a-z0-9]+/gi, "-").toLowerCase()}`}
                 className="flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-white/5 text-gray-300 hover:bg-amber-500/20 hover:text-amber-400 border border-white/10 hover:border-amber-500/40 transition-colors"
               >
-                {cat}
+                {localizeCategory(cat, locale)}
               </a>
             ))}
           </div>
@@ -92,10 +93,10 @@ export default function BooksPage() {
               >
                 <div className="flex items-baseline justify-between mb-6 pb-3 border-b border-white/10">
                   <h3 className="text-xl sm:text-2xl font-semibold text-amber-400">
-                    {category}
+                    {localizeCategory(category, locale)}
                   </h3>
                   <span className="text-sm text-gray-500">
-                    {items.length} {items.length === 1 ? "book" : "books"}
+                    {items.length} {items.length === 1 ? uiLabels.book : uiLabels.books}
                   </span>
                 </div>
 

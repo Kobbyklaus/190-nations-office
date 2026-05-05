@@ -352,3 +352,68 @@ export function localizeBook(
     image: entry?.image,
   };
 }
+
+// Per-locale category names. Falls back to the English category if missing.
+export const CATEGORY_TRANSLATIONS: Record<string, Record<string, string>> = {
+  es: {
+    "Christian Living": "Vida Cristiana",
+    "Leadership & Ministry": "Liderazgo y Ministerio",
+    "Church Growth": "Crecimiento de la Iglesia",
+    "Loyalty & Character": "Lealtad y Carácter",
+    "Anointing & Spirit": "Unción y Espíritu",
+    "Prayer & Devotion": "Oración y Devoción",
+    "Servant Ministry": "Ministerio de Servicio",
+    "Spiritual Warfare": "Guerra Espiritual",
+    "Salvation & Evangelism": "Salvación y Evangelismo",
+    "Faith & Victory": "Fe y Victoria",
+    "Stewardship & Honour": "Mayordomía y Honra",
+    "Marriage & Family": "Matrimonio y Familia",
+  },
+  fr: {
+    "Christian Living": "Vie Chrétienne",
+    "Leadership & Ministry": "Leadership et Ministère",
+    "Church Growth": "Croissance de l'Église",
+    "Loyalty & Character": "Loyauté et Caractère",
+    "Anointing & Spirit": "Onction et Esprit",
+    "Prayer & Devotion": "Prière et Dévotion",
+    "Servant Ministry": "Ministère de Serviteur",
+    "Spiritual Warfare": "Combat Spirituel",
+    "Salvation & Evangelism": "Salut et Évangélisation",
+    "Faith & Victory": "Foi et Victoire",
+    "Stewardship & Honour": "Intendance et Honneur",
+    "Marriage & Family": "Mariage et Famille",
+  },
+  pt: {
+    "Christian Living": "Vida Cristã",
+    "Leadership & Ministry": "Liderança e Ministério",
+    "Church Growth": "Crescimento da Igreja",
+    "Loyalty & Character": "Lealdade e Caráter",
+    "Anointing & Spirit": "Unção e Espírito",
+    "Prayer & Devotion": "Oração e Devoção",
+    "Servant Ministry": "Ministério de Servo",
+    "Spiritual Warfare": "Guerra Espiritual",
+    "Salvation & Evangelism": "Salvação e Evangelismo",
+    "Faith & Victory": "Fé e Vitória",
+    "Stewardship & Honour": "Mordomia e Honra",
+    "Marriage & Family": "Casamento e Família",
+  },
+};
+
+export function localizeCategory(enCategory: string, locale: string): string {
+  return CATEGORY_TRANSLATIONS[locale]?.[enCategory] ?? enCategory;
+}
+
+// Small UI labels on the books page that aren't covered by next-intl messages.
+export const BOOKS_UI_LABELS: Record<string, { jumpTo: string; book: string; books: string }> = {
+  en: { jumpTo: "Jump to:", book: "book", books: "books" },
+  es: { jumpTo: "Ir a:", book: "libro", books: "libros" },
+  fr: { jumpTo: "Aller à :", book: "livre", books: "livres" },
+  pt: { jumpTo: "Ir para:", book: "livro", books: "livros" },
+  da: { jumpTo: "Hop til:", book: "bog", books: "bøger" },
+  hi: { jumpTo: "यहाँ जाएँ:", book: "पुस्तक", books: "पुस्तकें" },
+  ur: { jumpTo: "یہاں جائیں:", book: "کتاب", books: "کتابیں" },
+};
+
+export function booksUiLabels(locale: string) {
+  return BOOKS_UI_LABELS[locale] ?? BOOKS_UI_LABELS.en;
+}
