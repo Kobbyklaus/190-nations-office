@@ -12,6 +12,14 @@ export interface Book {
   category: string;
 }
 
+export interface LibraryBook {
+  title: string;
+  description: string;
+  image: string;
+  category: string;
+  slug: string;
+}
+
 export interface RegionalData {
   region: string;
   churches: number;
