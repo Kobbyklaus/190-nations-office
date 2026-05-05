@@ -16,7 +16,8 @@ export const CONFERENCE_LIVE_ENABLED = false;
 // Per-locale book download domain. The "books" word is translated:
 //   - English: dagbooks
 //   - Spanish: daglibros (libros)
-//   - French / Portuguese: daglivres (livres)
+//   - French: daglivres (livres)
+//   - Portuguese: daglivros (livros)
 //   - Danish: dagboeger (bøger, ø → oe for ASCII domains)
 //   - Hindi: dagpustak (पुस्तक)
 //   - Urdu: dagkitab (کتاب)
@@ -27,7 +28,7 @@ export const BOOK_DOMAIN_BY_LOCALE: Record<string, string> = {
   en: "190.dagbooks.org",
   es: "190.daglibros.org",
   fr: "190.daglivres.org",
-  pt: "190.daglivres.org",
+  pt: "190.daglivros.org",
   da: "190.dagboeger.org",
   hi: "190.dagpustak.org",
   ur: "190.dagkitab.org",
