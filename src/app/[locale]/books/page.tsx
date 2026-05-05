@@ -1,15 +1,22 @@
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import Image from "next/image";
 import HeroSection from "@/components/sections/HeroSection";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import AnimatedCounter from "@/components/ui/AnimatedCounter";
 import Button from "@/components/ui/Button";
-import { LIBRARY_BOOKS, BOOK_LANGUAGES } from "@/lib/constants";
+import {
+  LIBRARY_BOOKS,
+  BOOK_LANGUAGES,
+  bookUrlFor,
+  BOOK_DOMAIN_BY_LOCALE,
+} from "@/lib/constants";
 import { ArrowDownToLine } from "lucide-react";
 
 export default function BooksPage() {
   const t = useTranslations("books");
+  const locale = useLocale();
+  const bookDomain = BOOK_DOMAIN_BY_LOCALE[locale] ?? BOOK_DOMAIN_BY_LOCALE.en;
 
   const totalBooks = LIBRARY_BOOKS.length;
   const categories = Array.from(new Set(LIBRARY_BOOKS.map((b) => b.category)));
@@ -96,7 +103,7 @@ export default function BooksPage() {
                   {items.map((book) => (
                     <a
                       key={book.slug}
-                      href={`https://190.dagbooks.org/book/${book.slug}`}
+                      href={bookUrlFor(locale, book.slug)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group flex flex-col"
@@ -155,7 +162,7 @@ export default function BooksPage() {
           </h2>
           <p className="text-gray-400 text-lg mb-8">{t("ctaSubtitle")}</p>
           <div className="flex flex-wrap justify-center gap-4">
-            <Button href="https://190.dagbooks.org" external size="lg">
+            <Button href={`https://${bookDomain}`} external size="lg">
               {t("requestBooks")}
             </Button>
             <Button href="/contact" variant="outline" size="lg">

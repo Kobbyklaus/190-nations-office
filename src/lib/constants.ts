@@ -13,6 +13,31 @@ import type {
 // Set to true once the conference-stream service is back online.
 export const CONFERENCE_LIVE_ENABLED = false;
 
+// Per-locale book download domain. The "books" word is translated:
+//   - English: dagbooks
+//   - Spanish: daglibros (libros)
+//   - French / Portuguese: daglivres (livres)
+//   - Danish: dagboeger (bøger, ø → oe for ASCII domains)
+//   - Hindi: dagpustak (पुस्तक)
+//   - Urdu: dagkitab (کتاب)
+// Update each entry once the actual subdomain is confirmed at the
+// dagbooks side. If a locale's domain is not yet live, leave it as
+// "190.dagbooks.org" so links don't break.
+export const BOOK_DOMAIN_BY_LOCALE: Record<string, string> = {
+  en: "190.dagbooks.org",
+  es: "190.daglibros.org",
+  fr: "190.daglivres.org",
+  pt: "190.daglivres.org",
+  da: "190.dagboeger.org",
+  hi: "190.dagpustak.org",
+  ur: "190.dagkitab.org",
+};
+
+export function bookUrlFor(locale: string, slug: string): string {
+  const domain = BOOK_DOMAIN_BY_LOCALE[locale] ?? BOOK_DOMAIN_BY_LOCALE.en;
+  return `https://${domain}/book/${slug}`;
+}
+
 export const STATS = [
   { value: 190, suffix: "+", label: "Nations Reached" },
   { value: 1600, suffix: "+", label: "Pastors Connected" },
