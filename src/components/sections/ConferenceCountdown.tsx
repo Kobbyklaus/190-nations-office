@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Calendar, MapPin, Clock } from "lucide-react";
 import type { ConferenceEvent } from "@/types";
-import { parseConferenceDateTime, formatConferenceDateTime } from "@/lib/conference-date";
+import { parseConferenceDateTime, formatConferenceLocal } from "@/lib/conference-date";
 
 interface ConferenceCountdownProps {
   conferences: ConferenceEvent[];
@@ -68,7 +68,12 @@ export default function ConferenceCountdown({
   const minutes = Math.max(0, Math.floor((diff % 3_600_000) / 60_000));
   const seconds = Math.max(0, Math.floor((diff % 60_000) / 1000));
 
-  const formatted = formatConferenceDateTime(target.dt, locale);
+  const formatted = formatConferenceLocal(
+    target.event.date,
+    target.event.time,
+    target.event.timezone,
+    locale,
+  );
 
   return (
     <section className="relative bg-gradient-to-br from-amber-500/10 via-slate-900 to-slate-950 border-y border-amber-500/30 py-10 sm:py-14 overflow-hidden">

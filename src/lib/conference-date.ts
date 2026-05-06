@@ -99,3 +99,44 @@ export function formatConferenceDateTime(d: Date, locale = "en-GB"): string {
     return d.toUTCString();
   }
 }
+
+/**
+ * Format the conference exactly as entered in the sheet — "9 May 2026 at 19:00 GMT-4".
+ * The date is locale-formatted; the time and timezone are passed through unchanged
+ * so the user sees the local-time/local-tz they typed in, not a UTC conversion.
+ */
+export function formatConferenceLocal(
+  dateStr: string,
+  timeStr?: string,
+  timezone?: string,
+  locale = "en-GB",
+): string {
+  let datePart = dateStr;
+
+  // Format date if it's DD/MM/YYYY or YYYY-MM-DD
+  const ddmm = dateStr.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  const ymd = dateStr.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/);
+  let y: number | undefined, m: number | undefined, d: number | undefined;
+  if (ddmm) {
+    [, d, m, y] = ddmm.map(Number) as unknown as [unknown, number, number, number];
+  } else if (ymd) {
+    [, y, m, d] = ymd.map(Number) as unknown as [unknown, number, number, number];
+  }
+  if (y !== undefined && m !== undefined && d !== undefined) {
+    const dt = new Date(Date.UTC(y, m - 1, d));
+    if (!isNaN(dt.getTime())) {
+      try {
+        datePart = new Intl.DateTimeFormat(locale, {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "UTC",
+        }).format(dt);
+      } catch {}
+    }
+  }
+
+  if (!timeStr) return datePart;
+  const tzSuffix = timezone ? ` ${timezone}` : "";
+  return `${datePart} · ${timeStr}${tzSuffix}`;
+}
