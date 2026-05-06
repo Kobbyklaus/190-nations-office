@@ -13,19 +13,31 @@ import {
   ExternalLink,
   CreditCard,
   Banknote,
+  Smartphone,
   Shield,
   ArrowRight,
+  X,
+  Copy,
+  Check,
 } from "lucide-react";
 
 const STRIPE_URL = "https://buy.stripe.com/9AQ4jN72z3dcdNefZc";
 const PAYPAL_URL = "https://www.paypal.com/donate/?hosted_button_id=ANJA968AS654E";
-const PAGBANK_URL = "https://pag.ae/7ZXA8iT66";
+
+// UK bank account shown in the Pay-by-Bank-app modal.
+// Source: dhmm190.com offering page.
+const UK_BANK = {
+  accountName: "E-Conference DHMM",
+  accountNumber: "0307 4930",
+  sortCode: "04-00-03",
+};
 
 type Frequency = "oneTime" | "monthly" | "sponsor";
 
 export default function GivePage() {
   const t = useTranslations("give");
   const [frequency, setFrequency] = useState<Frequency>("oneTime");
+  const [bankAppOpen, setBankAppOpen] = useState(false);
 
   const frequencies = [
     {
@@ -48,24 +60,32 @@ export default function GivePage() {
     },
   ];
 
-  const methods = [
+  type Method =
+    | { key: string; label: string; desc: string; url: string; icon: typeof CreditCard }
+    | { key: string; label: string; desc: string; cta: string; icon: typeof CreditCard; onClick: () => void };
+
+  const methods: Method[] = [
     {
       key: "stripe",
       label: t("methodStripe"),
       desc: t("methodStripeDesc"),
       url: STRIPE_URL,
+      icon: CreditCard,
     },
     {
       key: "paypal",
       label: t("methodPayPal"),
       desc: t("methodPayPalDesc"),
       url: PAYPAL_URL,
+      icon: CreditCard,
     },
     {
-      key: "pagbank",
-      label: t("methodPagBank"),
-      desc: t("methodPagBankDesc"),
-      url: PAGBANK_URL,
+      key: "bank-app",
+      label: t("methodBankApp"),
+      desc: t("methodBankAppDesc"),
+      cta: t("methodBankAppCta"),
+      icon: Smartphone,
+      onClick: () => setBankAppOpen(true),
     },
   ];
 
@@ -129,26 +149,40 @@ export default function GivePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading title={t("methodTitle")} subtitle={t("methodSubtitle")} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {methods.map((m) => (
-              <GlassCard key={m.key} hover className="p-6 flex flex-col">
-                <div className="flex items-center gap-3 mb-3">
-                  <CreditCard className="w-5 h-5 text-amber-400" />
-                  <h3 className="text-white font-semibold text-lg">{m.label}</h3>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
-                  {m.desc}
-                </p>
-                <a
-                  href={m.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-semibold text-sm hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/20"
-                >
-                  {t("giveNow")}
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </GlassCard>
-            ))}
+            {methods.map((m) => {
+              const Icon = m.icon;
+              return (
+                <GlassCard key={m.key} hover className="p-6 flex flex-col">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Icon className="w-5 h-5 text-amber-400" />
+                    <h3 className="text-white font-semibold text-lg">{m.label}</h3>
+                  </div>
+                  <p className="text-gray-400 text-sm leading-relaxed mb-6 flex-1">
+                    {m.desc}
+                  </p>
+                  {"url" in m ? (
+                    <a
+                      href={m.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-semibold text-sm hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/20"
+                    >
+                      {t("giveNow")}
+                      <ExternalLink className="w-3.5 h-3.5" />
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={m.onClick}
+                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-semibold text-sm hover:from-amber-400 hover:to-amber-500 transition-all shadow-lg shadow-amber-500/20"
+                    >
+                      {m.cta}
+                      <Smartphone className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </GlassCard>
+              );
+            })}
           </div>
 
           <p className="text-center text-gray-500 text-xs mt-6 flex items-center justify-center gap-2">
@@ -217,6 +251,158 @@ export default function GivePage() {
           <p className="text-amber-400 font-semibold">&mdash; Luke 6:38</p>
         </div>
       </section>
+
+      {bankAppOpen && (
+        <BankAppModal
+          onClose={() => setBankAppOpen(false)}
+          modalTitle={t("bankAppModalTitle")}
+          heading={t("bankAppHeading")}
+          accountNameLabel={t("bankAppAccountName")}
+          accountNumberLabel={t("bankAppAccountNumber")}
+          sortCodeLabel={t("bankAppSortCode")}
+          copyLabel={t("bankAppCopy")}
+          copiedLabel={t("bankAppCopyDone")}
+          note={t("bankAppNote")}
+        />
+      )}
     </>
+  );
+}
+
+interface BankAppModalProps {
+  onClose: () => void;
+  modalTitle: string;
+  heading: string;
+  accountNameLabel: string;
+  accountNumberLabel: string;
+  sortCodeLabel: string;
+  copyLabel: string;
+  copiedLabel: string;
+  note: string;
+}
+
+function BankAppModal({
+  onClose,
+  modalTitle,
+  heading,
+  accountNameLabel,
+  accountNumberLabel,
+  sortCodeLabel,
+  copyLabel,
+  copiedLabel,
+  note,
+}: BankAppModalProps) {
+  const [copied, setCopied] = useState<string | null>(null);
+
+  const copy = (label: string, value: string) => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(value).then(() => {
+        setCopied(label);
+        window.setTimeout(() => setCopied(null), 1500);
+      });
+    }
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      role="dialog"
+      aria-modal="true"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-md rounded-2xl bg-white text-slate-900 shadow-2xl overflow-hidden"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-5 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+          <span className="text-sm font-bold uppercase tracking-wider">{modalTitle}</span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="p-1 rounded-md hover:bg-white/20 transition-colors"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="p-7 sm:p-8">
+          <h2 className="text-center text-2xl font-bold mb-6 font-[family-name:var(--font-playfair)]">
+            {heading}
+          </h2>
+          <BankRow
+            label={accountNameLabel}
+            value={UK_BANK.accountName}
+            copied={copied === accountNameLabel}
+            copyLabel={copyLabel}
+            copiedLabel={copiedLabel}
+            onCopy={() => copy(accountNameLabel, UK_BANK.accountName)}
+          />
+          <BankRow
+            label={accountNumberLabel}
+            value={UK_BANK.accountNumber}
+            mono
+            copied={copied === accountNumberLabel}
+            copyLabel={copyLabel}
+            copiedLabel={copiedLabel}
+            onCopy={() => copy(accountNumberLabel, UK_BANK.accountNumber.replace(/\s/g, ""))}
+          />
+          <BankRow
+            label={sortCodeLabel}
+            value={UK_BANK.sortCode}
+            mono
+            copied={copied === sortCodeLabel}
+            copyLabel={copyLabel}
+            copiedLabel={copiedLabel}
+            onCopy={() => copy(sortCodeLabel, UK_BANK.sortCode)}
+          />
+          <p className="mt-6 text-xs text-slate-500 text-center leading-relaxed">{note}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function BankRow({
+  label,
+  value,
+  mono,
+  copied,
+  copyLabel,
+  copiedLabel,
+  onCopy,
+}: {
+  label: string;
+  value: string;
+  mono?: boolean;
+  copied: boolean;
+  copyLabel: string;
+  copiedLabel: string;
+  onCopy: () => void;
+}) {
+  return (
+    <div className="mb-5 text-center">
+      <p className="text-red-700 font-bold text-base mb-1">{label}</p>
+      <div className="flex items-center justify-center gap-2">
+        <p className={`text-slate-900 ${mono ? "font-mono tracking-wider" : ""}`}>{value}</p>
+        <button
+          type="button"
+          onClick={onCopy}
+          className="ml-1 inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+          aria-label={copied ? copiedLabel : copyLabel}
+        >
+          {copied ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-green-600" />
+              <span>{copiedLabel}</span>
+            </>
+          ) : (
+            <>
+              <Copy className="w-3.5 h-3.5" />
+              <span>{copyLabel}</span>
+            </>
+          )}
+        </button>
+      </div>
+    </div>
   );
 }
