@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Calendar, MapPin, Clock } from "lucide-react";
 import type { ConferenceEvent } from "@/types";
 import { parseConferenceDateTime, formatConferenceDateTime } from "@/lib/conference-date";
@@ -79,48 +80,67 @@ export default function ConferenceCountdown({
         }}
         aria-hidden
       />
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-4">
-          <Calendar className="w-3.5 h-3.5" />
-          {labels.next}
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold uppercase tracking-wider mb-6 mx-auto block w-fit">
+          <Calendar className="w-3.5 h-3.5 inline" />
+          <span className="ml-1.5">{labels.next}</span>
         </div>
 
-        <h2 className="text-2xl sm:text-4xl font-bold text-white mb-2 font-[family-name:var(--font-playfair)]">
-          {target.event.country}
-        </h2>
-
-        <div className="flex items-center justify-center gap-4 text-gray-300 text-sm mb-7 flex-wrap">
-          <span className="inline-flex items-center gap-1.5">
-            <Clock className="w-4 h-4 text-amber-400" />
-            {formatted}
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="w-4 h-4 text-amber-400" />
-            {target.event.country}
-          </span>
-        </div>
-
-        {live ? (
-          <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-red-500 to-amber-500 text-slate-950 font-bold text-xl">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70" />
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-white" />
-            </span>
-            {labels.liveNow}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-10 items-center">
+          {/* Flyer */}
+          <div className="relative aspect-square sm:aspect-[4/5] md:aspect-square w-full max-w-md mx-auto md:max-w-none rounded-2xl overflow-hidden ring-2 ring-amber-500/40 shadow-2xl shadow-amber-500/20">
+            {target.event.image ? (
+              <Image
+                src={target.event.image}
+                alt={`${target.event.country} conference flyer`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 90vw, 40vw"
+                priority
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 via-amber-700/10 to-slate-900 flex items-center justify-center">
+                <MapPin className="w-12 h-12 text-amber-400/70" />
+              </div>
+            )}
           </div>
-        ) : (
-          <>
-            <p className="text-xs uppercase tracking-wider text-amber-400/80 font-semibold mb-3">
-              {labels.startsIn}
-            </p>
-            <div className="grid grid-cols-4 gap-2 sm:gap-4 max-w-xl mx-auto">
-              <CountBox value={days} label={labels.days} />
-              <CountBox value={hours} label={labels.hours} />
-              <CountBox value={minutes} label={labels.minutes} />
-              <CountBox value={seconds} label={labels.seconds} />
+
+          {/* Country + countdown */}
+          <div className="text-center md:text-left">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-3 font-[family-name:var(--font-playfair)]">
+              {target.event.country}
+            </h2>
+
+            <div className="flex items-center justify-center md:justify-start gap-4 text-gray-300 text-sm mb-7 flex-wrap">
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="w-4 h-4 text-amber-400" />
+                {formatted}
+              </span>
             </div>
-          </>
-        )}
+
+            {live ? (
+              <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-red-500 to-amber-500 text-slate-950 font-bold text-xl">
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white/70" />
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white" />
+                </span>
+                {labels.liveNow}
+              </div>
+            ) : (
+              <>
+                <p className="text-xs uppercase tracking-wider text-amber-400/80 font-semibold mb-3">
+                  {labels.startsIn}
+                </p>
+                <div className="grid grid-cols-4 gap-2 sm:gap-3">
+                  <CountBox value={days} label={labels.days} />
+                  <CountBox value={hours} label={labels.hours} />
+                  <CountBox value={minutes} label={labels.minutes} />
+                  <CountBox value={seconds} label={labels.seconds} />
+                </div>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
