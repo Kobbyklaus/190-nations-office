@@ -65,12 +65,14 @@ export default function Navbar() {
 
             <div className="flex items-center gap-3">
               <LanguageSwitcher />
-              <Link
-                href="/admin"
+              <a
+                href="https://www.dhmm190.com/accounts/login/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="hidden sm:inline-flex px-4 py-2 text-sm font-medium rounded-lg bg-amber-500 text-slate-950 hover:bg-amber-400 transition-colors"
               >
                 {t("signIn")}
-              </Link>
+              </a>
               <button
                 onClick={() => setMobileOpen(true)}
                 className="lg:hidden p-2 text-gray-300 hover:text-white"

@@ -63,13 +63,15 @@ export default function MobileMenu({ isOpen, onClose, links }: MobileMenuProps) 
                   </Link>
                 );
               })}
-              <Link
-                href="/admin"
+              <a
+                href="https://www.dhmm190.com/accounts/login/"
+                target="_blank"
+                rel="noopener noreferrer"
                 onClick={onClose}
                 className="mt-4 px-4 py-3 text-center rounded-lg bg-amber-500 text-slate-950 font-semibold hover:bg-amber-400 transition-colors"
               >
                 {t("signIn")}
-              </Link>
+              </a>
             </div>
           </motion.div>
         </>
