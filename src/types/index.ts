@@ -37,6 +37,10 @@ export interface ConferenceEvent {
   date: string;
   image: string;
   status: "upcoming" | "past" | "ongoing";
+  /** Optional HH:MM (24h). Defaults to "10:00" when missing. */
+  time?: string;
+  /** Optional IANA TZ name (e.g. "America/Argentina/Buenos_Aires") or UTC offset like "UTC-3". Defaults to UTC. */
+  timezone?: string;
 }
 
 export interface ScheduleItem {

@@ -4,6 +4,7 @@ import CTASection from "@/components/sections/CTASection";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import ConferenceCard from "@/components/ui/ConferenceCard";
+import ConferenceCountdown from "@/components/sections/ConferenceCountdown";
 import Button from "@/components/ui/Button";
 import {
   CONFERENCE_SCHEDULE,
@@ -48,9 +49,62 @@ const topicIcons: Record<string, React.ElementType> = {
 const CONFERENCE_ROOM_URL = "https://conference-stream.onrender.com";
 const REGISTER_URL = "https://www.dhmm190.com/conference/";
 
-export default async function ConferencesPage() {
+export default async function ConferencesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
   const t = await getTranslations("conferences");
   const conferences = await getConferences();
+
+  // Per-locale countdown labels
+  const countdownLabels: Record<string, Partial<Parameters<typeof ConferenceCountdown>[0]["labels"]>> = {
+    en: {},
+    es: {
+      next: "Próxima conferencia",
+      startsIn: "Comienza en",
+      days: "Días", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+      liveNow: "¡En vivo ahora — únase!",
+      noUpcoming: "No hay conferencias próximas programadas.",
+    },
+    fr: {
+      next: "Prochaine conférence",
+      startsIn: "Commence dans",
+      days: "Jours", hours: "Heures", minutes: "Minutes", seconds: "Secondes",
+      liveNow: "En direct — rejoignez-nous !",
+      noUpcoming: "Aucune conférence à venir.",
+    },
+    pt: {
+      next: "Próxima conferência",
+      startsIn: "Começa em",
+      days: "Dias", hours: "Horas", minutes: "Minutos", seconds: "Segundos",
+      liveNow: "Ao vivo agora — participe!",
+      noUpcoming: "Nenhuma conferência próxima.",
+    },
+    da: {
+      next: "Næste konference",
+      startsIn: "Starter om",
+      days: "Dage", hours: "Timer", minutes: "Minutter", seconds: "Sekunder",
+      liveNow: "Live nu — deltag!",
+      noUpcoming: "Ingen kommende konferencer planlagt.",
+    },
+    hi: {
+      next: "अगला सम्मेलन",
+      startsIn: "शुरू होने में",
+      days: "दिन", hours: "घंटे", minutes: "मिनट", seconds: "सेकंड",
+      liveNow: "अभी लाइव — शामिल हों!",
+      noUpcoming: "कोई आगामी सम्मेलन निर्धारित नहीं है।",
+    },
+    ur: {
+      next: "اگلی کانفرنس",
+      startsIn: "شروع ہونے میں",
+      days: "دن", hours: "گھنٹے", minutes: "منٹ", seconds: "سیکنڈ",
+      liveNow: "ابھی لائیو — شامل ہوں!",
+      noUpcoming: "کوئی آنے والی کانفرنس طے نہیں۔",
+    },
+  };
+  const labels = countdownLabels[locale] ?? countdownLabels.en;
 
   const steps = [
     { icon: UserPlus, title: t("step1Title"), desc: t("step1Desc") },
@@ -75,6 +129,13 @@ export default async function ConferencesPage() {
             ? { label: t("joinNow"), href: CONFERENCE_ROOM_URL, external: true }
             : undefined
         }
+      />
+
+      {/* Live Countdown to next country conference */}
+      <ConferenceCountdown
+        conferences={conferences}
+        locale={locale}
+        labels={labels}
       />
 
       {/* Live Conference Links Banner */}

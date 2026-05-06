@@ -48,6 +48,8 @@ function parseCsv(csv: string): ConferenceEvent[] {
     date: headers.indexOf("date"),
     image: headers.indexOf("image"),
     status: headers.indexOf("status"),
+    time: headers.indexOf("time"),
+    timezone: headers.indexOf("timezone"),
   };
 
   if (idx.country === -1 || idx.date === -1 || idx.status === -1) return [];
@@ -65,6 +67,8 @@ function parseCsv(csv: string): ConferenceEvent[] {
       date: cells[idx.date]?.trim() || "",
       image: cells[idx.image]?.trim() || "/images/conf-dominican.jpeg",
       status,
+      time: idx.time !== -1 ? cells[idx.time]?.trim() || undefined : undefined,
+      timezone: idx.timezone !== -1 ? cells[idx.timezone]?.trim() || undefined : undefined,
     });
   }
   return events;
