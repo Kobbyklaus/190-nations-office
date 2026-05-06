@@ -45,10 +45,11 @@ export function parseConferenceDateTime(
     }
   }
 
-  // Compute UTC offset
+  // Compute UTC offset.
+  // Accepts: "UTC+3", "UTC-3", "UTC+3:30", "GMT+3", "GMT-3", "GMT+0", or just "+3" / "-3".
   let offsetMinutes = 0;
   if (timezone) {
-    const off = timezone.match(/^UTC([+-])(\d{1,2})(?::?(\d{2}))?$/i);
+    const off = timezone.match(/^(?:UTC|GMT)?\s*([+-])(\d{1,2})(?::?(\d{2}))?$/i);
     if (off) {
       const sign = off[1] === "+" ? 1 : -1;
       const h = parseInt(off[2], 10) || 0;
