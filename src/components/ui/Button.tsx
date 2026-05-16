@@ -13,9 +13,9 @@ interface ButtonProps {
 }
 
 const variants = {
-  warm: "bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 hover:from-amber-400 hover:to-amber-500 shadow-lg shadow-amber-500/20",
-  blue: "bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-500 hover:to-indigo-500 shadow-lg shadow-blue-500/20",
-  outline: "border border-amber-500/50 text-amber-400 hover:bg-amber-500/10",
+  warm: "bg-gradient-to-r from-royal to-royal-dark text-white hover:from-royal-dark hover:to-royal-deep shadow-lg shadow-royal/20",
+  blue: "bg-gradient-to-r from-royal to-royal-dark text-white hover:from-royal-dark hover:to-royal-deep shadow-lg shadow-royal/20",
+  outline: "border border-gold/50 text-gold hover:bg-gold/10",
   ghost: "text-gray-300 hover:text-white hover:bg-white/5",
 };
 
@@ -36,7 +36,7 @@ export default function Button({
   type = "button",
 }: ButtonProps) {
   const classes = cn(
-    "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-300",
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-300",
     variants[variant],
     sizes[size],
     className

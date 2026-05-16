@@ -115,12 +115,8 @@ export default async function ConferencesPage({
   return (
     <>
       <HeroSection
-        images={[
-          "/images/bishop-dag-conference.jpg",
-          "/images/conf-chile.jpeg",
-          "/images/conf-dominican.jpeg",
-          "/images/bishop-dag-crowd.jpg",
-        ]}
+        video="/videos/hero-conference.mp4"
+        fallbackImage="/images/bishop-dag-conference.jpg"
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         primaryCta={{ label: t("register"), href: REGISTER_URL, external: true }}

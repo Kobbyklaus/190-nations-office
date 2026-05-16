@@ -39,13 +39,8 @@ export default async function HomePage() {
       />
 
       <HeroSection
-        images={[
-          "/images/bishop-dag-conference.jpg",
-          "/images/bishop-dag-preaching.jpg",
-          "/images/bishop-dag-stage.jpg",
-          "/images/bishop-dag-crowd.jpg",
-          "/images/mission.jpg",
-        ]}
+        video="/videos/hero-home.mp4"
+        fallbackImage="/images/bishop-dag-conference.jpg"
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         showLogo
@@ -112,7 +107,7 @@ export default async function HomePage() {
           <p className="text-gray-300 text-xl sm:text-2xl italic font-[family-name:var(--font-playfair)] leading-relaxed">
             &ldquo;{t("scripture")}&rdquo;
           </p>
-          <p className="text-amber-400 font-semibold mt-4">
+          <p className="text-gold font-semibold mt-4">
             &mdash; {t("scriptureRef")}
           </p>
         </div>

@@ -7,9 +7,19 @@
   --color-slate-700: #334155;
   --color-slate-400: #94a3b8;
   --color-slate-300: #cbd5e1;
-  --color-amber-400: #fbbf24;
-  --color-amber-500: #f59e0b;
-  --color-amber-600: #d97706;
+
+  /* Royal Blue + Gold palette */
+  --color-gold: #d4a836;
+  --color-gold-light: #e8c97a;
+  --color-gold-dark: #b8922a;
+  --color-royal: #3b82f6;
+  --color-royal-dark: #2563eb;
+  --color-royal-deep: #1d4ed8;
+
+  /* Legacy amber mapped to gold for backward compat */
+  --color-amber-400: #e8c97a;
+  --color-amber-500: #d4a836;
+  --color-amber-600: #b8922a;
   --color-blue-500: #3b82f6;
   --color-blue-600: #2563eb;
   --color-indigo-600: #4f46e5;
@@ -63,10 +73,10 @@
 @keyframes warm-glow {
   0%,
   100% {
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+    box-shadow: 0 0 15px rgba(212, 168, 54, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.6);
+    box-shadow: 0 0 30px rgba(212, 168, 54, 0.6);
   }
 }
 
@@ -94,14 +104,21 @@ body {
 }
 
 .text-gradient-warm {
-  background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+  background: linear-gradient(135deg, #e8c97a, #d4a836, #b8922a);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-blue {
-  background: linear-gradient(135deg, #3b82f6, #4f46e5);
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-royal-gold {
+  background: linear-gradient(135deg, #3b82f6, #d4a836);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

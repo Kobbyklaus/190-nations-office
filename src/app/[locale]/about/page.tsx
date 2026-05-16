@@ -20,7 +20,8 @@ export default function AboutPage() {
   return (
     <>
       <HeroSection
-        backgroundImage="/images/bishop-dag-preaching.jpg"
+        video="/videos/hero-about.mp4"
+        fallbackImage="/images/bishop-dag-preaching.jpg"
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
       />

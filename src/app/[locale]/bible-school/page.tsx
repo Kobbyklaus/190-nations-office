@@ -54,12 +54,8 @@ export default function BibleSchoolPage() {
   return (
     <>
       <HeroSection
-        images={[
-          "/images/anagkazo/campus-sunset.jpg",
-          "/images/anagkazo/bishop-teaching.jpg",
-          "/images/anagkazo/graduation-ceremony.jpg",
-          "/images/anagkazo/students-scripture.jpg",
-        ]}
+        video="/videos/hero-bible-school.mp4"
+        fallbackImage="/images/anagkazo/campus-sunset.jpg"
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
         primaryCta={{ label: t("applyTitle"), href: "/contact" }}

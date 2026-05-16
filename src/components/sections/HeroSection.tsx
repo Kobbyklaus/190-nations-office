@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 interface HeroSectionProps {
   backgroundImage?: string;
   images?: string[];
+  video?: string;
+  fallbackImage?: string;
   title: string;
   subtitle: string;
   primaryCta?: { label: string; href: string; external?: boolean };
@@ -19,6 +21,8 @@ interface HeroSectionProps {
 export default function HeroSection({
   backgroundImage,
   images,
+  video,
+  fallbackImage,
   title,
   subtitle,
   primaryCta,
@@ -29,9 +33,10 @@ export default function HeroSection({
   const slides = images && images.length > 0 ? images : backgroundImage ? [backgroundImage] : [];
   const [current, setCurrent] = useState(0);
   const [fading, setFading] = useState(false);
+  const hasVideo = !!video;
 
   useEffect(() => {
-    if (slides.length <= 1) return;
+    if (hasVideo || slides.length <= 1) return;
     const interval = setInterval(() => {
       setFading(true);
       setTimeout(() => {
@@ -40,12 +45,38 @@ export default function HeroSection({
       }, 600);
     }, 5000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [slides.length, hasVideo]);
 
   return (
     <section className={cn("relative min-h-[90vh] flex items-center overflow-hidden", className)}>
-      {/* Slideshow Images */}
-      {slides.map((src, i) => (
+      {/* Video Background */}
+      {hasVideo && (
+        <>
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src={video} type="video/mp4" />
+          </video>
+          {/* Fallback image for mobile / slow connections */}
+          {fallbackImage && (
+            <Image
+              src={fallbackImage}
+              alt=""
+              fill
+              className="object-cover md:hidden"
+              priority
+              sizes="100vw"
+            />
+          )}
+        </>
+      )}
+
+      {/* Image Slideshow (only when no video) */}
+      {!hasVideo && slides.map((src, i) => (
         <Image
           key={src}
           src={src}
@@ -60,8 +91,8 @@ export default function HeroSection({
         />
       ))}
 
-      {/* Slide indicators */}
-      {slides.length > 1 && (
+      {/* Slide indicators (only for image slideshows) */}
+      {!hasVideo && slides.length > 1 && (
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-2">
           {slides.map((_, i) => (
             <button
@@ -69,7 +100,7 @@ export default function HeroSection({
               onClick={() => { setFading(true); setTimeout(() => { setCurrent(i); setFading(false); }, 300); }}
               className={cn(
                 "h-1.5 rounded-full transition-all duration-300",
-                i === current ? "w-8 bg-amber-400" : "w-2 bg-white/40 hover:bg-white/70"
+                i === current ? "w-8 bg-gold" : "w-2 bg-white/40 hover:bg-white/70"
               )}
               aria-label={`Slide ${i + 1}`}
             />
@@ -77,7 +108,13 @@ export default function HeroSection({
         </div>
       )}
 
-      <div className="hero-overlay absolute inset-0" />
+      {/* Dark overlay for text readability */}
+      <div className={cn(
+        "absolute inset-0",
+        hasVideo
+          ? "bg-gradient-to-r from-slate-950/90 via-slate-950/70 to-slate-950/50"
+          : "hero-overlay"
+      )} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32">
         <div className="max-w-3xl">
@@ -88,7 +125,7 @@ export default function HeroSection({
                 alt="190 Nations Office"
                 width={80}
                 height={80}
-                className="rounded-full ring-2 ring-amber-500/30"
+                className="rounded-full ring-2 ring-gold/30"
               />
             </div>
           )}
