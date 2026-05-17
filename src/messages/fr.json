@@ -80,7 +80,12 @@
     "equippingTitle": "\u00c9quipement pratique",
     "equippingDesc": "Nos enseignements se concentrent sur des principes pratiques qui transforment les \u00e9glises.",
     "timelineTitle": "Notre parcours",
-    "timelineSubtitle": "\u00c9tapes cl\u00e9s de notre mission"
+    "timelineSubtitle": "\u00c9tapes cl\u00e9s de notre mission",
+    "statBooks": "Livres Publi\u00e9s",
+    "statCountries": "Pays",
+    "statCampaigns": "Campagnes",
+    "statSouls": "\u00c2mes Gagn\u00e9es",
+    "statYears": "Ans de Minist\u00e8re"
   },
   "conferences": {
     "heroTitle": "Conf\u00e9rence pastorale hebdomadaire",

@@ -80,7 +80,12 @@
     "equippingTitle": "Practical Equipping",
     "equippingDesc": "Our teachings focus on actionable principles that transform churches and communities.",
     "timelineTitle": "Our Journey",
-    "timelineSubtitle": "Key milestones in our mission to equip pastors worldwide"
+    "timelineSubtitle": "Key milestones in our mission to equip pastors worldwide",
+    "statBooks": "Books Published",
+    "statCountries": "Countries",
+    "statCampaigns": "Campaigns",
+    "statSouls": "Souls Won",
+    "statYears": "Years of Ministry"
   },
   "conferences": {
     "heroTitle": "Weekly Pastoral Conference",

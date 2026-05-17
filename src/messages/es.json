@@ -80,7 +80,12 @@
     "equippingTitle": "Equipamiento pr\u00e1ctico",
     "equippingDesc": "Nuestras ense\u00f1anzas se centran en principios que transforman iglesias.",
     "timelineTitle": "Nuestro recorrido",
-    "timelineSubtitle": "Hitos clave en nuestra misi\u00f3n"
+    "timelineSubtitle": "Hitos clave en nuestra misi\u00f3n",
+    "statBooks": "Libros Publicados",
+    "statCountries": "Pa\u00edses",
+    "statCampaigns": "Campa\u00f1as",
+    "statSouls": "Almas Ganadas",
+    "statYears": "A\u00f1os de Ministerio"
   },
   "conferences": {
     "heroTitle": "Conferencia pastoral semanal",

@@ -80,7 +80,12 @@
     "equippingTitle": "عملی لیس کرنا",
     "equippingDesc": "ہماری تعلیمات کلیسیاؤں اور برادریوں کو تبدیل کرنے والے عملی اصولوں پر مرکوز ہیں۔",
     "timelineTitle": "ہمارا سفر",
-    "timelineSubtitle": "دنیا بھر کے پادریوں کو لیس کرنے کے ہمارے مشن میں اہم سنگ میل"
+    "timelineSubtitle": "دنیا بھر کے پادریوں کو لیس کرنے کے ہمارے مشن میں اہم سنگ میل",
+    "statBooks": "شائع شدہ کتابیں",
+    "statCountries": "ممالک",
+    "statCampaigns": "مہمات",
+    "statSouls": "جیتی گئی روحیں",
+    "statYears": "سال کی خدمت"
   },
   "conferences": {
     "heroTitle": "ہفتہ وار پادری کانفرنس",

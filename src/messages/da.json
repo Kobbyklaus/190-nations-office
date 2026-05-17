@@ -80,7 +80,12 @@
     "equippingTitle": "Praktisk udrustning",
     "equippingDesc": "Vores undervisning fokuserer på handlingsrettede principper, der forvandler menigheder og fællesskaber.",
     "timelineTitle": "Vores rejse",
-    "timelineSubtitle": "Vigtige milepæle i vores mission om at udruste pastorer over hele verden"
+    "timelineSubtitle": "Vigtige milepæle i vores mission om at udruste pastorer over hele verden",
+    "statBooks": "Udgivne Bøger",
+    "statCountries": "Lande",
+    "statCampaigns": "Kampagner",
+    "statSouls": "Sjæle Vundet",
+    "statYears": "Års Tjeneste"
   },
   "conferences": {
     "heroTitle": "Ugentlig pastoralkonference",

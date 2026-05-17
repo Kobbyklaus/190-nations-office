@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
+import WorldMap from "@/components/sections/WorldMap";
 import { REGIONS } from "@/lib/constants";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
@@ -27,14 +27,8 @@ export default function GlobalReachSection({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading title={title} subtitle={subtitle} gradient />
 
-        <div className="mb-12 flex justify-center">
-          <Image
-            src="/images/world-map.svg"
-            alt="Global reach"
-            width={800}
-            height={400}
-            className="opacity-40"
-          />
+        <div className="mb-12">
+          <WorldMap />
         </div>
 
         <div

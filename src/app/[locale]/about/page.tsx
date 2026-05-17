@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import HeroSection from "@/components/sections/HeroSection";
+import MinistryStatsBanner from "@/components/sections/MinistryStatsBanner";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
 import TimelineItem from "@/components/ui/TimelineItem";
@@ -24,6 +25,16 @@ export default function AboutPage() {
         fallbackImage="/images/bishop-dag-preaching.jpg"
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
+      />
+
+      <MinistryStatsBanner
+        stats={[
+          { value: "70M+", label: t("statBooks") },
+          { value: "40", label: t("statCountries") },
+          { value: "308", label: t("statCampaigns") },
+          { value: "2.5M+", label: t("statSouls") },
+          { value: "40+", label: t("statYears") },
+        ]}
       />
 
       {/* Mission */}
@@ -55,7 +66,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden order-2 lg:order-1">
               <Image
-                src="/images/bishop-dag-quote.jpg"
+                src="/images/bishop-dag-conference.jpg"
                 alt="Bishop Dag Heward-Mills"
                 fill
                 className="object-cover"
