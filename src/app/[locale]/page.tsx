@@ -7,7 +7,8 @@ import GlobalReachSection from "@/components/sections/GlobalReachSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
 import UpcomingEventBanner from "@/components/sections/UpcomingEventBanner";
-import ConferenceCard from "@/components/ui/ConferenceCard";
+import BibleSchoolFeature from "@/components/sections/BibleSchoolFeature";
+import ConferenceGrid from "@/components/sections/ConferenceGrid";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { STATS, TESTIMONIALS, CONFERENCE_LIVE_ENABLED } from "@/lib/constants";
 import { getConferences } from "@/lib/conferences";
@@ -75,17 +76,34 @@ export default async function HomePage() {
           <SectionHeading
             title={t("conferences")}
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {conferences.map((event, i) => (
-              <ConferenceCard
-                key={i}
-                {...event}
-                statusLabel={event.status === "upcoming" ? "Upcoming" : "Past"}
-              />
-            ))}
-          </div>
+          <ConferenceGrid
+            conferences={conferences}
+            upcomingLabel={t("upcomingLabel")}
+            pastLabel={t("pastLabel")}
+            seeMoreLabel={t("seeMore")}
+            seeLessLabel={t("seeLess")}
+          />
         </div>
       </section>
+
+      {/* Bible School Feature */}
+      <BibleSchoolFeature
+        label={t("bsLabel")}
+        title={t("bsTitle")}
+        titleAccent={t("bsTitleAccent")}
+        description={t("bsDescription")}
+        programs={[
+          { name: t("bsMakarios"), duration: t("bsMakariosDur"), note: t("bsMakariosNote") },
+          { name: t("bsMachaneh"), duration: t("bsMachanehDur") },
+          { name: t("bsManthano"), duration: t("bsManhanoDur") },
+          { name: t("bsAnagkazo"), duration: t("bsAnagkazoDur") },
+        ]}
+        applyLabel={t("bsApply")}
+        applyHref="/bible-school"
+        callLabel={t("bsCall")}
+        callHref="tel:+233557467460"
+        backgroundImage="/images/anagkazo/campus-sunset.jpg"
+      />
 
       <TestimonialsSection
         title={t("testimonialsTitle")}

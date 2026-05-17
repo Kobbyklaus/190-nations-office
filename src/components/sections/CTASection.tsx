@@ -22,7 +22,7 @@ export default function CTASection({
         src={backgroundImage}
         alt=""
         fill
-        className="object-cover"
+        className="object-cover object-top"
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-slate-950/80" />

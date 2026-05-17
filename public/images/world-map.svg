@@ -1,77 +1,219 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" width="1000" height="500">
   <defs>
-    <filter id="mapglow">
-      <feGaussianBlur stdDeviation="2" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+      </feMerge>
     </filter>
   </defs>
-  <rect width="1000" height="500" fill="#0f172a"/>
-  <!-- Simplified world map outlines -->
-  <g fill="#3b82f6" fill-opacity="0.15" stroke="#3b82f6" stroke-width="0.8" stroke-opacity="0.4">
+
+  <!-- Background -->
+  <rect width="1000" height="500" fill="#020617"/>
+
+  <!-- Grid lines for subtle map feel -->
+  <g stroke="rgba(255,255,255,0.03)" stroke-width="0.5" fill="none">
+    <line x1="0" y1="250" x2="1000" y2="250"/>
+    <line x1="0" y1="125" x2="1000" y2="125"/>
+    <line x1="0" y1="375" x2="1000" y2="375"/>
+    <line x1="500" y1="0" x2="500" y2="500"/>
+    <line x1="250" y1="0" x2="250" y2="500"/>
+    <line x1="750" y1="0" x2="750" y2="500"/>
+  </g>
+
+  <!-- Continents - simplified but recognizable shapes -->
+  <g fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.25)" stroke-width="0.7">
+
     <!-- North America -->
-    <path d="M150 120 Q170 100 210 95 Q240 90 260 100 Q275 108 280 120 Q285 135 278 150 Q270 162 260 170 Q248 178 235 182 Q220 186 208 180 Q195 172 185 162 Q170 148 160 138 Q152 130 150 120Z"/>
+    <path d="M80 55 L95 50 L110 48 L130 52 L145 48 L165 44 L185 48 L200 55 L218 52 L235 58 L248 65 L255 72 L260 80 L258 88 L250 95 L245 105 L248 115 L252 125 L248 132 L240 138 L232 145 L228 152 L222 158 L218 165 L212 170 L205 172 L198 168 L192 162 L188 155 L182 150 L175 148 L168 145 L160 140 L155 132 L150 125 L145 118 L138 112 L130 108 L122 105 L115 100 L108 95 L100 92 L92 88 L85 82 L80 75 L78 65 Z"/>
+
+    <!-- Greenland -->
+    <path d="M285 35 L300 30 L318 32 L330 38 L335 48 L332 58 L325 65 L312 68 L298 65 L288 58 L282 48 L283 40 Z"/>
+
     <!-- Central America -->
-    <path d="M208 180 Q215 190 220 200 Q222 210 218 218 Q212 225 205 222 Q200 215 202 205 Q204 195 208 180Z"/>
+    <path d="M175 195 L180 192 L185 195 L190 200 L195 205 L198 212 L200 218 L198 225 L195 230 L190 235 L185 238 L180 235 L178 228 L175 222 L172 215 L170 208 L172 200 Z"/>
+
+    <!-- Caribbean islands -->
+    <path d="M210 195 L218 192 L225 195 L228 200 L225 205 L218 205 L212 202 Z"/>
+    <path d="M232 198 L238 196 L242 200 L238 204 L232 202 Z"/>
+    <path d="M245 205 L250 202 L255 206 L252 210 L246 208 Z"/>
+
     <!-- South America -->
-    <path d="M220 230 Q240 220 255 228 Q268 238 275 260 Q280 285 278 310 Q274 340 265 360 Q255 378 240 385 Q228 388 220 375 Q212 358 208 335 Q205 310 207 285 Q210 260 215 245 Q218 235 220 230Z"/>
+    <path d="M200 240 L210 235 L222 232 L235 234 L248 238 L258 245 L268 255 L275 268 L280 282 L282 298 L280 315 L278 330 L275 345 L270 358 L262 368 L255 378 L248 385 L240 390 L232 392 L225 388 L220 380 L215 368 L212 355 L210 340 L208 322 L205 305 L202 288 L200 272 L198 258 L197 248 Z"/>
+
     <!-- Europe -->
-    <path d="M440 90 Q460 80 485 85 Q505 90 515 102 Q520 112 515 125 Q508 135 495 138 Q480 142 465 138 Q452 132 445 120 Q438 108 440 90Z"/>
+    <path d="M430 68 L440 62 L452 58 L465 60 L478 58 L490 62 L498 68 L505 72 L510 78 L515 85 L518 92 L520 100 L518 108 L515 115 L510 120 L505 125 L498 128 L492 132 L485 130 L478 125 L472 128 L465 132 L458 130 L452 125 L448 118 L445 112 L440 105 L435 98 L430 92 L428 82 L429 75 Z"/>
+
+    <!-- UK/Ireland -->
+    <path d="M415 72 L420 68 L425 72 L425 82 L422 88 L418 85 L415 78 Z"/>
+    <path d="M410 75 L413 72 L415 78 L412 82 L409 78 Z"/>
+
+    <!-- Scandinavia -->
+    <path d="M470 35 L475 30 L480 32 L485 38 L488 45 L490 52 L488 58 L484 55 L480 50 L476 45 L472 40 Z"/>
+
+    <!-- Italy -->
+    <path d="M472 128 L475 132 L478 138 L480 145 L478 152 L475 148 L472 142 L470 135 Z"/>
+
+    <!-- Iberian Peninsula -->
+    <path d="M420 110 L430 108 L438 112 L440 118 L438 125 L432 128 L425 126 L420 120 L418 115 Z"/>
+
     <!-- Africa -->
-    <path d="M460 170 Q480 155 505 162 Q520 170 530 190 Q538 215 535 245 Q530 280 520 310 Q510 335 495 348 Q480 355 468 342 Q455 325 450 300 Q445 270 448 240 Q450 210 455 190 Q457 178 460 170Z"/>
-    <!-- Middle East -->
-    <path d="M530 140 Q548 130 565 138 Q578 148 580 165 Q578 180 568 188 Q555 192 542 185 Q532 175 528 160 Q526 148 530 140Z"/>
-    <!-- Asia -->
-    <path d="M580 80 Q620 68 670 72 Q720 78 760 95 Q790 110 800 135 Q805 160 790 180 Q770 198 740 205 Q710 210 680 205 Q650 198 625 185 Q600 170 588 150 Q575 128 575 105 Q576 90 580 80Z"/>
-    <!-- India subcontinent -->
-    <path d="M640 195 Q655 188 668 195 Q678 205 680 225 Q678 248 670 265 Q660 278 648 272 Q638 262 635 245 Q632 225 636 210 Q638 200 640 195Z"/>
-    <!-- Southeast Asia -->
-    <path d="M720 210 Q740 200 758 210 Q770 222 768 240 Q762 255 748 260 Q735 262 725 252 Q718 240 718 225 Q719 215 720 210Z"/>
+    <path d="M435 160 L445 155 L458 152 L472 155 L485 158 L498 162 L510 168 L520 175 L528 185 L535 198 L538 212 L540 228 L538 245 L535 262 L530 278 L525 295 L518 310 L510 322 L500 332 L490 338 L478 342 L465 338 L455 330 L448 318 L442 305 L438 290 L435 275 L432 258 L430 240 L430 222 L432 205 L432 188 L433 175 L434 165 Z"/>
+
+    <!-- Madagascar -->
+    <path d="M545 310 L548 305 L552 308 L555 318 L553 328 L550 335 L546 330 L544 320 Z"/>
+
+    <!-- Middle East / Arabian Peninsula -->
+    <path d="M535 148 L548 142 L562 145 L575 148 L582 155 L585 165 L582 175 L578 182 L572 188 L565 192 L558 190 L552 185 L545 180 L538 172 L535 162 L534 155 Z"/>
+
+    <!-- Asia (main mass) -->
+    <path d="M520 45 L540 40 L560 38 L580 35 L600 32 L620 30 L640 28 L660 30 L680 32 L700 35 L720 40 L740 45 L755 52 L768 60 L778 70 L785 82 L788 95 L786 108 L782 118 L775 125 L768 130 L760 135 L752 138 L745 140 L738 138 L730 135 L722 132 L715 128 L708 125 L700 122 L692 120 L685 118 L678 120 L670 122 L662 125 L655 128 L648 130 L640 128 L632 125 L625 120 L618 115 L610 110 L602 108 L595 105 L588 102 L580 100 L572 98 L565 95 L558 90 L552 85 L545 78 L538 72 L530 65 L525 58 L522 50 Z"/>
+
+    <!-- India -->
+    <path d="M620 155 L630 150 L642 148 L655 152 L665 158 L672 168 L675 180 L675 195 L672 210 L668 225 L662 238 L655 248 L645 255 L635 252 L628 242 L622 230 L618 215 L615 200 L614 185 L615 170 L617 160 Z"/>
+
+    <!-- Southeast Asia peninsula -->
+    <path d="M688 155 L695 150 L702 152 L708 158 L712 168 L715 180 L712 192 L708 202 L702 210 L695 215 L690 210 L685 200 L682 188 L680 175 L682 165 L685 158 Z"/>
+
+    <!-- Japan -->
+    <path d="M795 85 L800 80 L805 82 L808 88 L810 95 L808 102 L805 108 L800 112 L796 108 L794 100 L793 92 Z"/>
+
+    <!-- Indonesia / Maritime SE Asia -->
+    <path d="M700 235 L712 232 L722 235 L730 238 L735 235 L742 232 L750 235 L755 240 L752 245 L745 248 L738 245 L730 248 L722 250 L715 248 L708 245 L702 242 L700 238 Z"/>
+    <path d="M760 240 L768 238 L775 242 L778 248 L775 252 L768 252 L762 248 L760 244 Z"/>
+
+    <!-- Philippines -->
+    <path d="M755 175 L760 172 L765 175 L767 182 L765 190 L760 195 L756 190 L754 182 Z"/>
+
     <!-- Australia -->
-    <path d="M760 320 Q790 308 820 315 Q845 325 852 345 Q855 365 842 380 Q825 392 800 388 Q778 382 765 365 Q755 348 758 332 Q759 324 760 320Z"/>
+    <path d="M725 310 L740 302 L758 298 L778 300 L798 305 L815 312 L830 322 L840 335 L845 350 L842 365 L835 378 L822 388 L808 392 L792 390 L778 385 L765 378 L752 368 L742 355 L735 340 L730 325 L726 315 Z"/>
+
     <!-- New Zealand -->
-    <path d="M870 370 Q878 365 885 370 Q890 378 887 388 Q882 395 875 392 Q868 385 868 378 Q869 372 870 370Z"/>
+    <path d="M862 365 L868 360 L873 362 L876 370 L875 378 L872 385 L868 388 L864 385 L862 378 L861 370 Z"/>
+    <path d="M858 390 L862 388 L866 392 L865 398 L862 400 L858 397 L857 393 Z"/>
+
+    <!-- Tasmania -->
+    <path d="M820 398 L825 395 L830 398 L830 404 L826 406 L822 404 L820 400 Z"/>
   </g>
-  <!-- Glowing connection dots -->
-  <g filter="url(#mapglow)">
-    <circle cx="220" cy="130" r="4" fill="#fbbf24"/>
-    <circle cx="250" cy="115" r="3" fill="#fbbf24"/>
-    <circle cx="205" cy="168" r="3" fill="#fbbf24"/>
-    <circle cx="245" cy="195" r="2.5" fill="#fbbf24"/>
-    <circle cx="260" cy="275" r="4" fill="#fbbf24"/>
-    <circle cx="235" cy="340" r="3.5" fill="#fbbf24"/>
-    <circle cx="248" cy="245" r="3" fill="#fbbf24"/>
-    <circle cx="240" cy="295" r="2.5" fill="#fbbf24"/>
-    <circle cx="470" cy="100" r="3.5" fill="#fbbf24"/>
-    <circle cx="490" cy="115" r="3" fill="#fbbf24"/>
-    <circle cx="505" cy="98" r="2.5" fill="#fbbf24"/>
-    <circle cx="490" cy="200" r="4" fill="#fbbf24"/>
-    <circle cx="510" cy="290" r="3.5" fill="#fbbf24"/>
-    <circle cx="475" cy="310" r="3" fill="#fbbf24"/>
-    <circle cx="480" cy="180" r="2.5" fill="#fbbf24"/>
-    <circle cx="555" cy="160" r="3" fill="#fbbf24"/>
-    <circle cx="660" cy="240" r="4" fill="#fbbf24"/>
-    <circle cx="750" cy="230" r="3.5" fill="#fbbf24"/>
-    <circle cx="740" cy="150" r="3" fill="#fbbf24"/>
-    <circle cx="720" cy="215" r="3" fill="#fbbf24"/>
-    <circle cx="700" cy="190" r="2.5" fill="#fbbf24"/>
-    <circle cx="800" cy="345" r="3.5" fill="#fbbf24"/>
-    <circle cx="880" cy="380" r="2.5" fill="#fbbf24"/>
+
+  <!-- Ministry presence markers with glow -->
+  <!-- Outer glow layer -->
+  <g filter="url(#softglow)" opacity="0.4">
+    <!-- South America - 515 churches (largest) -->
+    <circle cx="245" cy="310" r="12" fill="#d4a836"/>
+    <!-- North America - 294 churches -->
+    <circle cx="185" cy="120" r="9" fill="#d4a836"/>
+    <!-- Asia - 233 churches -->
+    <circle cx="680" cy="115" r="8" fill="#d4a836"/>
+    <!-- Europe - 198 churches -->
+    <circle cx="478" cy="95" r="7.5" fill="#d4a836"/>
+    <!-- Africa - 145 churches -->
+    <circle cx="485" cy="255" r="7" fill="#d4a836"/>
+    <!-- Oceania - 92 churches -->
+    <circle cx="790" cy="350" r="6" fill="#d4a836"/>
+    <!-- Caribbean - 68 churches -->
+    <circle cx="225" cy="198" r="5.5" fill="#d4a836"/>
+    <!-- Middle East - 41 churches -->
+    <circle cx="560" cy="165" r="5" fill="#d4a836"/>
+    <!-- Central America - 41 churches -->
+    <circle cx="182" cy="215" r="5" fill="#d4a836"/>
   </g>
-  <!-- Connection arcs -->
-  <g stroke="#fbbf24" stroke-width="0.5" opacity="0.15" fill="none">
-    <path d="M220 130 Q350 50 470 100"/>
-    <path d="M470 100 Q600 50 740 150"/>
-    <path d="M220 130 Q240 200 260 275"/>
-    <path d="M470 100 Q480 140 490 200"/>
-    <path d="M490 200 Q580 180 660 240"/>
-    <path d="M660 240 Q720 200 750 230"/>
-    <path d="M750 230 Q780 280 800 345"/>
-    <path d="M235 340 Q350 380 475 310"/>
-    <path d="M555 160 Q610 190 660 240"/>
+
+  <!-- Main marker dots -->
+  <g filter="url(#glow)">
+    <!-- South America - 515 churches (largest marker) -->
+    <circle cx="245" cy="310" r="7" fill="#d4a836"/>
+    <circle cx="245" cy="310" r="4" fill="#fff" opacity="0.6"/>
+
+    <!-- North America - 294 churches -->
+    <circle cx="185" cy="120" r="5.5" fill="#d4a836"/>
+    <circle cx="185" cy="120" r="3" fill="#fff" opacity="0.6"/>
+
+    <!-- Asia - 233 churches -->
+    <circle cx="680" cy="115" r="5" fill="#d4a836"/>
+    <circle cx="680" cy="115" r="2.8" fill="#fff" opacity="0.6"/>
+
+    <!-- Europe - 198 churches -->
+    <circle cx="478" cy="95" r="4.8" fill="#d4a836"/>
+    <circle cx="478" cy="95" r="2.5" fill="#fff" opacity="0.6"/>
+
+    <!-- Africa - 145 churches -->
+    <circle cx="485" cy="255" r="4.5" fill="#d4a836"/>
+    <circle cx="485" cy="255" r="2.3" fill="#fff" opacity="0.6"/>
+
+    <!-- Oceania - 92 churches -->
+    <circle cx="790" cy="350" r="4" fill="#d4a836"/>
+    <circle cx="790" cy="350" r="2" fill="#fff" opacity="0.6"/>
+
+    <!-- Caribbean - 68 churches -->
+    <circle cx="225" cy="198" r="3.5" fill="#d4a836"/>
+    <circle cx="225" cy="198" r="1.8" fill="#fff" opacity="0.6"/>
+
+    <!-- Middle East - 41 churches -->
+    <circle cx="560" cy="165" r="3.2" fill="#d4a836"/>
+    <circle cx="560" cy="165" r="1.6" fill="#fff" opacity="0.6"/>
+
+    <!-- Central America - 41 churches -->
+    <circle cx="182" cy="215" r="3.2" fill="#d4a836"/>
+    <circle cx="182" cy="215" r="1.6" fill="#fff" opacity="0.6"/>
   </g>
-  <!-- Legend -->
-  <g transform="translate(50, 460)">
-    <circle cx="0" cy="0" r="4" fill="#fbbf24"/>
-    <text x="12" y="4" fill="#94a3b8" font-family="system-ui" font-size="11">Active pastor connections across 99 countries</text>
+
+  <!-- Secondary presence dots (smaller, spread across regions) -->
+  <g fill="#d4a836" opacity="0.6">
+    <!-- South America spread -->
+    <circle cx="230" cy="270" r="2"/>
+    <circle cx="260" cy="290" r="1.8"/>
+    <circle cx="250" cy="345" r="1.5"/>
+    <circle cx="225" cy="255" r="1.5"/>
+    <circle cx="268" cy="320" r="1.8"/>
+
+    <!-- North America spread -->
+    <circle cx="160" cy="105" r="2"/>
+    <circle cx="200" cy="130" r="1.8"/>
+    <circle cx="145" cy="125" r="1.5"/>
+
+    <!-- Asia spread -->
+    <circle cx="650" cy="100" r="1.8"/>
+    <circle cx="710" cy="125" r="1.5"/>
+    <circle cx="635" cy="165" r="1.8"/>
+    <circle cx="660" cy="200" r="1.5"/>
+    <circle cx="700" cy="180" r="1.5"/>
+    <circle cx="750" cy="180" r="1.3"/>
+
+    <!-- Europe spread -->
+    <circle cx="460" cy="80" r="1.5"/>
+    <circle cx="500" cy="105" r="1.5"/>
+    <circle cx="445" cy="110" r="1.3"/>
+    <circle cx="510" cy="88" r="1.3"/>
+
+    <!-- Africa spread -->
+    <circle cx="470" cy="220" r="1.5"/>
+    <circle cx="500" cy="280" r="1.5"/>
+    <circle cx="510" cy="240" r="1.3"/>
+    <circle cx="460" cy="290" r="1.3"/>
+
+    <!-- Oceania spread -->
+    <circle cx="770" cy="335" r="1.5"/>
+    <circle cx="820" cy="360" r="1.3"/>
+    <circle cx="865" cy="375" r="1.2"/>
+
+    <!-- Caribbean spread -->
+    <circle cx="235" cy="192" r="1.3"/>
+    <circle cx="248" cy="205" r="1.2"/>
+
+    <!-- Middle East spread -->
+    <circle cx="548" cy="155" r="1.3"/>
+    <circle cx="572" cy="175" r="1.2"/>
+
+    <!-- Central America spread -->
+    <circle cx="178" cy="205" r="1.2"/>
+    <circle cx="188" cy="225" r="1.2"/>
   </g>
 </svg>
