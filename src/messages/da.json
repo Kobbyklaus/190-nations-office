@@ -182,7 +182,15 @@
     "whatsappNote": "Kun tekst · 24/7 svar",
     "privacyNotice": "Ved at indsende denne formular accepterer du, at vi kan kontakte dig om din henvendelse. Vi vil aldrig dele dine oplysninger med tredjeparter. Se hvordan vi behandler dine data i vores",
     "privacyLink": "privatlivspolitik",
-    "responseTimeNote": "Vi svarer typisk inden for 1-2 hverdage."
+    "responseTimeNote": "Vi svarer typisk inden for 1-2 hverdage.",
+    "sending": "Sender...",
+    "successTitle": "Besked sendt!",
+    "successMsg": "Tak fordi du kontaktede os. Vores team vender tilbage inden for 1-2 hverdage.",
+    "sendAnother": "Send en ny besked",
+    "errorMsg": "Noget gik galt. Prøv igen, eller skriv til os på allnations@dhmm190.com.",
+    "required": "Dette felt er påkrævet",
+    "invalidEmail": "Indtast en gyldig e-mailadresse",
+    "messageTooShort": "Indtast en besked på mindst 10 tegn"
   },
   "give": {
     "heroTitle": "Støt missionen",

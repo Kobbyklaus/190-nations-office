@@ -181,7 +181,15 @@
     "whatsappNote": "Solo mensajes \u00b7 respuesta 24/7",
     "privacyNotice": "Al enviar este formulario, acepta que podamos contactarle sobre su consulta. Nunca compartiremos sus datos con terceros. Vea c\u00f3mo manejamos sus datos en nuestro",
     "privacyLink": "aviso de privacidad",
-    "responseTimeNote": "Normalmente respondemos en 1\u20132 d\u00edas h\u00e1biles."
+    "responseTimeNote": "Normalmente respondemos en 1\u20132 d\u00edas h\u00e1biles.",
+    "sending": "Enviando...",
+    "successTitle": "\u00a1Mensaje enviado!",
+    "successMsg": "Gracias por contactarnos. Nuestro equipo le responder\u00e1 en 1\u20132 d\u00edas h\u00e1biles.",
+    "sendAnother": "Enviar otro mensaje",
+    "errorMsg": "Algo sali\u00f3 mal. Int\u00e9ntelo de nuevo o escr\u00edbanos a allnations@dhmm190.com.",
+    "required": "Este campo es obligatorio",
+    "invalidEmail": "Ingrese una direcci\u00f3n de correo v\u00e1lida",
+    "messageTooShort": "Ingrese un mensaje de al menos 10 caracteres"
   },
   "give": {
     "heroTitle": "Apoyar la misi\u00f3n",

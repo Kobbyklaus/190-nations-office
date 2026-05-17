@@ -181,7 +181,15 @@
     "whatsappNote": "Texte uniquement · réponse 24/7",
     "privacyNotice": "En soumettant ce formulaire, vous acceptez que nous vous contactions au sujet de votre demande. Nous ne partagerons jamais vos coordonnées avec des tiers. Consultez notre",
     "privacyLink": "avis de confidentialité",
-    "responseTimeNote": "Nous répondons généralement sous 1 à 2 jours ouvrés."
+    "responseTimeNote": "Nous répondons généralement sous 1 à 2 jours ouvrés.",
+    "sending": "Envoi en cours...",
+    "successTitle": "Message envoyé !",
+    "successMsg": "Merci de nous avoir contactés. Notre équipe vous répondra sous 1 à 2 jours ouvrés.",
+    "sendAnother": "Envoyer un autre message",
+    "errorMsg": "Une erreur s'est produite. Réessayez ou écrivez-nous à allnations@dhmm190.com.",
+    "required": "Ce champ est obligatoire",
+    "invalidEmail": "Veuillez saisir une adresse e-mail valide",
+    "messageTooShort": "Veuillez saisir un message d'au moins 10 caractères"
   },
   "give": {
     "heroTitle": "Soutenir la mission",

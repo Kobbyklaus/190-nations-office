@@ -182,7 +182,15 @@
     "whatsappNote": "Text only · 24/7 response",
     "privacyNotice": "By submitting this form, you agree that we may contact you about your enquiry. We will never share your details with third parties. See how we handle your data in our",
     "privacyLink": "privacy notice",
-    "responseTimeNote": "We typically respond within 1–2 business days."
+    "responseTimeNote": "We typically respond within 1–2 business days.",
+    "sending": "Sending...",
+    "successTitle": "Message sent!",
+    "successMsg": "Thank you for reaching out. Our team will get back to you within 1–2 business days.",
+    "sendAnother": "Send another message",
+    "errorMsg": "Something went wrong. Please try again, or email us directly at allnations@dhmm190.com.",
+    "required": "This field is required",
+    "invalidEmail": "Please enter a valid email address",
+    "messageTooShort": "Please enter a message of at least 10 characters"
   },
   "give": {
     "heroTitle": "Support the Mission",

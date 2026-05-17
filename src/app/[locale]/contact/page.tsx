@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import SectionHeading from "@/components/ui/SectionHeading";
 import GlassCard from "@/components/ui/GlassCard";
-import Button from "@/components/ui/Button";
+import ContactForm from "@/components/ui/ContactForm";
 import { SOCIAL_LINKS } from "@/lib/constants";
-import { Mail, Phone, MessageCircle, Clock, Video, Globe, Camera, Shield } from "lucide-react";
+import { Mail, Phone, MessageCircle, Clock, Video, Globe, Camera } from "lucide-react";
 
 const socialIcons: Record<string, React.ElementType> = {
   Youtube: Video,
@@ -33,111 +33,7 @@ export default function ContactPage() {
                 <h3 className="text-xl font-semibold text-white mb-6">
                   {t("formTitle")}
                 </h3>
-                <form className="space-y-5">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("firstName")}
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("lastName")}
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1.5">
-                      {t("email")}
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                    />
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("whatsapp")}
-                      </label>
-                      <input
-                        type="tel"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("church")}
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                      />
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("country")}
-                      </label>
-                      <input
-                        type="text"
-                        className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm text-gray-400 mb-1.5">
-                        {t("interest")}
-                      </label>
-                      <select className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-amber-500/50 transition-colors">
-                        <option value="" className="bg-slate-900">Select...</option>
-                        <option value="conference" className="bg-slate-900">Weekly Conference</option>
-                        <option value="books" className="bg-slate-900">Free Books</option>
-                        <option value="partnership" className="bg-slate-900">Church Partnership</option>
-                        <option value="host" className="bg-slate-900">Host a Conference</option>
-                        <option value="bible-school" className="bg-slate-900">Bible School</option>
-                        <option value="donation" className="bg-slate-900">Donation</option>
-                        <option value="general" className="bg-slate-900">General Inquiry</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm text-gray-400 mb-1.5">
-                      {t("message")}
-                    </label>
-                    <textarea
-                      rows={5}
-                      className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-amber-500/50 transition-colors resize-none"
-                    />
-                  </div>
-                  <p className="text-xs text-gray-500 leading-relaxed flex items-start gap-2">
-                    <Shield className="w-3.5 h-3.5 text-gray-500 flex-shrink-0 mt-0.5" />
-                    <span>
-                      {t("privacyNotice")}{" "}
-                      <a
-                        href="mailto:allnations@dhmm190.com?subject=Privacy%20policy%20request"
-                        className="text-amber-400 hover:text-amber-300 underline"
-                      >
-                        {t("privacyLink")}
-                      </a>
-                      .
-                    </span>
-                  </p>
-                  <Button type="submit" size="lg" className="w-full">
-                    {t("submit")}
-                  </Button>
-                  <p className="text-xs text-gray-500 text-center">
-                    {t("responseTimeNote")}
-                  </p>
-                </form>
+                <ContactForm />
               </GlassCard>
             </div>
 
