@@ -97,11 +97,13 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-      {/* Honeypot — hidden from humans */}
+      {/* Honeypot — hidden from humans, bots fill it. Text input so the
+          value is always a string ("" when empty) and passes validation. */}
       <input
-        type="checkbox"
+        type="text"
         tabIndex={-1}
         autoComplete="off"
+        aria-hidden="true"
         className="hidden"
         {...register("botcheck")}
       />
